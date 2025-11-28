@@ -216,7 +216,11 @@
         if (e.isIntersecting) e.target.classList.add("show");
       });
     });
-    document.querySelectorAll(".section").forEach(s => observer.observe(s));
+    
+    document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+    window.addEventListener("load", () => {
+      document.querySelector(".hero").classList.add("show");
+    });
 
     /* 갤러리 확대 */
     const lightbox = document.getElementById("lightbox");
