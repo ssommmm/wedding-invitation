@@ -382,14 +382,14 @@
         } else {
           content.style.maxHeight = content.scrollHeight + "px";
         }
-      }
+      });
     });
 
     /* 이미지맵 모바일 대응 */
     function resizeImageMap() {
       const img = document.querySelector('img[usemap]');
       const map = document.querySelector('map[name="' + img.useMap.replace('#','') + '"]');
-      const originalWidth = 1080; // 이미지 원본 가로 픽셀
+      const originalWidth = 1080; 
       const scale = img.clientWidth / originalWidth;
       map.querySelectorAll('area').forEach(area => {
         const coords = area.dataset.originalCoords.split(',').map(c => Math.round(c*scale));
