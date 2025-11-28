@@ -45,10 +45,22 @@
       padding: 0px;
     }
 
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 1;
+      position: relative;
+    }
+
+    /* 첫 번째 사진만 가로로 넓게 */
+    .gallery-item:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 9;
+    }
+    
     .gallery img {
       width: 100%;
       height: 100%;
-      border-radius: 2px;
       object-fit: cover;
       cursor: pointer;
       transition: transform 0.5s ease;
@@ -164,15 +176,15 @@
   <div class="section">
     <h2 style="color:#3056d3">Gallery</h2>
     <div class="gallery">
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery3.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery4.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery5.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery6.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" />
-      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery3.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery4.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery5.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery6.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" />
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" />
     </div>
   </div>
 
@@ -219,15 +231,16 @@
 
   <script>
     /* 스크롤 애니메이션 */
-    const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-        obs.unobserve(entry.target);  // 한 번 등장하면 다시 관찰 X → 유지됨
-      }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        } else {
+          entry.target.classList.remove('show');
+        }
     });
   }, {
-    threshold: 0.15   // 요소 15%만 보여도 트리거됨
+    threshold: 0.15  
   });
 
   document.querySelectorAll('.section').forEach(sec => {
