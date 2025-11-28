@@ -316,9 +316,15 @@
     const lightboxImg = document.getElementById("lightbox-img");
 
     document.querySelectorAll(".gallery img").forEach(img => {
-      img.addEventListener("click", () => {
+      img.addEventListener("click", (e) => {
+        const rect = img.getBoundingClientRect();
         lightboxImg.src = img.src;
-        lightbox.style.display = "flex";
+
+        lightbox.style.display = "block";
+        lightbox.style.position = "absolute"; // 클릭한 이미지 위치 기준
+        lightbox.style.top = (window.scrollY + rect.top) + "px";
+        lightbox.style.left = (window.scrollX + rect.left) + "px";
+        lightboxImg.style.width = rect.width + "px";
       });
     });
 
