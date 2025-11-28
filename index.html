@@ -219,42 +219,20 @@
 
   <script>
     /* 스크롤 애니메이션 */
-    const sections = Array.from(document.querySelectorAll('.section'));
-    let ticking = false;
+    const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        obs.unobserve(entry.target);  // 한 번 등장하면 다시 관찰 X → 유지됨
+      }
+    });
+  }, {
+    threshold: 0.15   // 요소 15%만 보여도 트리거됨
+  });
 
-    function activateCurrentSection() {
-      const viewportCenter = window.innerHeight / 2;
-      let closest = null;
-      let minDist = Infinity;
-
- sections.forEach(sec => {
-  const rect = sec.getBoundingClientRect();
-  const secCenter = rect.top + rect.height / 2;
-  const dist = Math.abs(secCenter - viewportCenter);
-
-  if (dist < minDist) {
-    minDist = dist;
-    closest = sec;
-   }
-});
-
-  sections.forEach(sec => sec.classList.remove('show'));
-  if (closest) closest.classList.add('show');
-  ticking = false;
-}
-
-function onScrollOrResize() {
-  if (!ticking) {
-    ticking = true;
-    requestAnimationFrame(activateCurrentSection);
-  }
-}
-
-window.addEventListener('scroll', onScrollOrResize, { passive: true });
-window.addEventListener('resize', onScrollOrResize);
-window.addEventListener('load', () => {
-  setTimeout(activateCurrentSection, 100);
-});
+  document.querySelectorAll('.section').forEach(sec => {
+    observer.observe(sec);
+  });
     
 
     /* 갤러리 확대 */
