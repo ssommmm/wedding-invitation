@@ -243,11 +243,12 @@
   <div class="section">
     <h2 style="text-align:center; color:#3056d3;">Location</h2>
     <iframe
-      src="https://map.kakao.com/embed/map/37.180187,127.881328"
-      width="100%"
-      height="400"
-      frameborder="0"
-      style="border:0;"
+      title="경남 진주시 논개길 103"
+      src="//map.kakao.com/?urlX=127.881328&urlY=37.180187&urlLevel=3" 
+      width="100%" 
+      height="400" 
+      frameborder="0" 
+      style="border:0;" 
       allowfullscreen>
     </iframe>
   </div>
@@ -284,34 +285,13 @@
   </div>
 </div>
 
-    
-  <!-- 계좌번호 Section -->
-  <div class="section">
-    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/account.png" width="100%" /><br>
 
-    <div class="account-box">
-      <strong>신랑측 계좌</strong><br>
-      기업은행 00-0000-00  
-      <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
-      예금주 홍길동
-    </div>
-
-    <div class="account-box">
-      <strong>신부측 계좌</strong><br>
-      기업은행 00-0000-00  
-      <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
-      예금주 홍길동
-    </div>
-  </div>
 
   <!-- RSVP -->
-  <div class="section">
-    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/rsvp.png" usemap="#rsvp-map" style="width:100%;" />
-    <map name="rsvp-map">
-      <!-- 좌표값은 이미지 원본 1080px 기준 예시 -->
-      <area shape="rect" coords="334,1238,334,146" href="https://forms.gle/M734cHHLjnXcgyCE8" alt="RSVP">
-    </map>
-  </div>
+  <div class="section" style="position: relative;">
+    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/rsvp.png" style="width:100%;" />
+    <a href="https://forms.gle/M734cHHLjnXcgyCE8" class="btn rsvp-btn">✔ 참석 의사 전달하기</a>
+</div>
 
   <!-- 공유하기 -->
   <div class="share-box section">
@@ -346,11 +326,13 @@
         const rect = img.getBoundingClientRect();
         lightboxImg.src = img.src;
 
-        lightbox.style.display = "block";
-        lightbox.style.position = "absolute"; // 클릭한 이미지 위치 기준
-        lightbox.style.top = (window.scrollY + rect.top) + "px";
-        lightbox.style.left = (window.scrollX + rect.left) + "px";
-        lightboxImg.style.width = rect.width + "px";
+        lightbox.style.display = "flex"; // display:flex로
+        lightbox.style.position = "fixed";
+        lightbox.style.top = "50%";
+        lightbox.style.left = "50%";
+        lightboxImg.style.width = "90%";
+        lightboxImg.style.maxWidth = "500px";
+        lightboxImg.style.transform = "translate(-50%, -50%)";
       });
     });
 
@@ -384,21 +366,7 @@
         }
       });
     });
-
-    /* 이미지맵 모바일 대응 */
-    function resizeImageMap() {
-      const img = document.querySelector('img[usemap]');
-      const map = document.querySelector('map[name="' + img.useMap.replace('#','') + '"]');
-      const originalWidth = 1080; 
-      const scale = img.clientWidth / originalWidth;
-      map.querySelectorAll('area').forEach(area => {
-        const coords = area.dataset.originalCoords.split(',').map(c => Math.round(c*scale));
-        area.coords = coords.join(',');
-      });
-    }
-    document.querySelectorAll('area').forEach(area => area.dataset.originalCoords = area.coords);
-    window.addEventListener('resize', resizeImageMap);
-    window.addEventListener('load', resizeImageMap);
+    
     </script>
 
 </body>
