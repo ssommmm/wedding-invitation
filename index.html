@@ -18,6 +18,7 @@
       opacity: 0;
       transform: translateY(40px);
       transition: all 0.8s ease;
+      will-change: opacity, transform;
     }
 
     .section.show {
@@ -218,28 +219,42 @@
 
   <script>
     /* 스크롤 애니메이션 */
-    const sections = document.querySelectorAll('.section');
+    const sections = Array.from(document.querySelectorAll('.section'));
+    let ticking = false;
 
     function activateCurrentSection() {
+      const viewportCenter = window.innerHeight / 2;
       let closest = null;
-      let closestOffset = Number.POSITIVE_INFINITY;
+      let minDist = Infinity;
 
  sections.forEach(sec => {
   const rect = sec.getBoundingClientRect();
-  const offset = Math.abs(rect.top);
+  const secCenter = rect.top + rect.height / 2;
+  const dist = Math.abs(secCenter - viewportCenter);
 
-  if (offset < closestOffset) {
-    closestOffset = offset;
+  if (dist < minDist) {
+    minDist = dist;
     closest = sec;
    }
 });
 
   sections.forEach(sec => sec.classList.remove('show'));
   if (closest) closest.classList.add('show');
+  ticking = false;
 }
 
-window.addEventListener('scroll', activateCurrentSection);
-window.addEventListener('load', activateCurrentSection);
+function onScrollOrResize() {
+  if (!ticking) {
+    ticking = true;
+    requestAnimationFrame(activateCurrentSection);
+  }
+}
+
+window.addEventListener('scroll', onScrollOrResize, { passive: true });
+window.addEventListener('resize', onScrollOrResize);
+window.addEventListener('load', () => {
+  setTimeout(activateCurrentSection, 100);
+});
     
 
     /* 갤러리 확대 */
