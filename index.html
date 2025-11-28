@@ -15,10 +15,8 @@
     }
 
     .section {
-      padding: 0px 0px;
-      text-align: center;
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(40px);
       transition: all 0.8s ease;
     }
 
@@ -26,6 +24,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+
 
     .main-img {
       width: 100%;
@@ -52,11 +51,6 @@
       object-fit: cover;
       cursor: pointer;
       transition: transform 0.5s ease;
-    }
- 
-    .gallery-item:first-child {
-            grid-column: 1 / -1;
-            aspect-ratio: 16 / 9;
     }
     
     .gallery img:hover {
@@ -169,15 +163,15 @@
   <div class="section">
     <h2 style="color:#3056d3">Gallery</h2>
     <div class="gallery">
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery3.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery4.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery5.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery6.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" />
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery3.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery4.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery5.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery6.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" />
+      <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" />
     </div>
   </div>
 
@@ -224,13 +218,28 @@
 
   <script>
     /* 스크롤 애니메이션 */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add("show");
-      });
-    });
-    
-    document.querySelectorAll(".section").forEach(s => observer.observe(s));
+    const sections = document.querySelectorAll('.section');
+
+    function activateCurrentSection() {
+      let closest = null;
+      let closestOffset = Number.POSITIVE_INFINITY;
+
+ sections.forEach(sec => {
+  const rect = sec.getBoundingClientRect();
+  const offset = Math.abs(rect.top);
+
+  if (offset < closestOffset) {
+    closestOffset = offset;
+    closest = sec;
+   }
+});
+
+  sections.forEach(sec => sec.classList.remove('show'));
+  if (closest) closest.classList.add('show');
+}
+
+window.addEventListener('scroll', activateCurrentSection);
+window.addEventListener('load', activateCurrentSection);
     
 
     /* 갤러리 확대 */
