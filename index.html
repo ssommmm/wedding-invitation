@@ -89,6 +89,7 @@
       width:90%;
       max-width:500px;
       border-radius:6px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
     .button {
@@ -232,6 +233,7 @@
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" /></div>
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" /></div>
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" /></div>
+    </div>
   </div>
 
   <!-- Lightbox -->
@@ -244,7 +246,7 @@
     <h2 style="text-align:center; color:#3056d3;">Location</h2>
     <iframe
       title="경남 진주시 논개길 103"
-      src="//map.kakao.com/?urlX=127.881328&urlY=37.180187&urlLevel=3" 
+      src="https://map.kakao.com/?urlX=127.881328&urlY=37.180187&urlLevel=3&map_type=TYPE_MAP" 
       width="100%" 
       height="400" 
       frameborder="0" 
@@ -322,21 +324,15 @@
     const lightboxImg = document.getElementById("lightbox-img");
 
     document.querySelectorAll(".gallery img").forEach(img => {
-      img.addEventListener("click", (e) => {
-        const rect = img.getBoundingClientRect();
+      img.addEventListener("click", () => {
         lightboxImg.src = img.src;
-
-        lightbox.style.display = "flex"; // display:flex로
-        lightbox.style.position = "fixed";
-        lightbox.style.top = "50%";
-        lightbox.style.left = "50%";
-        lightboxImg.style.width = "90%";
-        lightboxImg.style.maxWidth = "500px";
-        lightboxImg.style.transform = "translate(-50%, -50%)";
+        lightbox.style.display = "flex"; // 화면 중앙에서 뜸
       });
     });
 
-    lightbox.addEventListener("click", () => lightbox.style.display = "none");
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+    });
 
     /* 복사 */
     function copyText(text) {
