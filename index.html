@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Pretendard", sans-serif;
+      background: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* 부드러운 페이드업 애니메이션 */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+    }
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 메인 이미지 부드럽게 올라오는 효과 */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1.2s ease;
+    }
+    .hero.show img {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 섹션 공통 */
+    section {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #003f9e;
+    }
+
+    /* 계좌 복사 박스 */
+    .account-box {
+      padding: 20px;
+      background: #f7f7f7;
+      margin-bottom: 15px;
+      border-radius: 10px;
+    }
+    .copy-btn {
+      float: right;
+      padding: 6px 10px;
+      border: 1px solid #888;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    /* 전화 버튼 */
+    .call-btn {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 10px;
+      background: #003f9e;
+      color: #fff;
+      text-decoration: none;
+      margin: 10px;
+    }
+
+    /* 방명록 iframe */
+    .guestbook {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 12px;
+      background: #eee;
+    }
+
+    /* 공유 버튼 */
+    .share-box {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .share-btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      color: #fff;
+      background: #003f9e;
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 메인 히어로 -->
+  <div class="hero">
+    <img src="Frame1.png" alt="Main Image" />
+  </div>
+
+  <!-- 신랑 & 신부 연락처 -->
+  <section class="fade-up">
+    <h2>연락처</h2>
+    <div style="text-align:center;">
+      <a class="call-btn" href="tel:010-0000-0000">신랑에게 전화하기</a>
+      <a class="call-btn" href="tel:010-0000-0000">신부에게 전화하기</a>
+    </div>
+  </section>
+
+  <!-- 계좌번호 복사 -->
+  <section class="fade-up">
+    <h2>마음 전하실 곳</h2>
+    <div class="account-box">
+      기업은행 00-0000-00 홍길동
+      <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>
+    </div>
+    <div class="account-box">
+      기업은행 00-0000-00 홍길동
+      <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>
+    </div>
+  </section>
+
+  <!-- 오시는 길 이미지 -->
+  <section class="fade-up">
+    <h2>오시는 길</h2>
+    <img src="Frame2.png" style="width:100%; border-radius:10px;" />
+  </section>
+
+  <!-- 방명록 (무료 사용 Notion 페이지 예시) -->
+  <section class="fade-up">
+    <h2>방명록</h2>
+    <iframe class="guestbook" src="https://notion.so" title="guestbook"></iframe>
+  </section>
+
+  <!-- 공유 버튼 -->
+  <section class="fade-up share-box">
+    <h2>공유하기</h2>
+    <a class="share-btn" onclick="shareKakao()">카카오톡 공유</a>
+    <a class="share-btn" onclick="copyURL()">링크 복사</a>
+  </section>
+
+<script>
+  /* 스크롤 애니메이션 */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  });
+
+  document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+
+  window.addEventListener("load", () => {
+    document.querySelector(".hero").classList.add("show");
+  });
+
+  /* 계좌번호 복사 */
+  function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert("복사되었습니다!");
+  }
+
+  /* 링크 공유 */
+  function copyURL() {
+    navigator.clipboard.writeText(window.location.href);
+    alert("링크를 복사했습니다");
+  }
+
+  /* 카카오톡 공유 (토큰만 넣으면 동작) */
+  function shareKakao() {
+    alert("카카오톡 공유 기능은 카카오 개발자 등록이 필요합니다");
+  }
+</script>
+
+</body>
+</html>
