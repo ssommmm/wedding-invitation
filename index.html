@@ -152,13 +152,13 @@
 
     .rsvp-btn {
       position: absolute;
-      bottom: 20px;             /* 이미지 아래쪽에서 20px 위 */
+      bottom: 40px;             /* 이미지 아래쪽에서 40px 위 */
       left: 50%;                /* 좌우 중앙 */
       transform: translateX(-50%); /* 정확히 중앙 정렬 */
       padding: 12px 24px;
       font-size: 16px;
       background: #3056d3;
-      color: white;
+      color: #fff;
       border-radius: 30px;
       text-decoration: none;
       z-index: 10;              /* 이미지 위로 올라오게 */
@@ -217,15 +217,15 @@
 
   <!-- Location -->
   <div class="section">
-    <iframe 
-      src="https://map.kakao.com/link/map/논개길 103,진주시,경상남도,37.180187,127.881328" 
-      width="100%" 
-      height="400" 
-      frameborder="0" 
-      style="border:0;" 
+    <h2 style="text-align:center; color:#3056d3;">Location</h2>
+    <iframe
+      src="https://map.kakao.com/embed?urlX=127.881328&urlY=37.180187&urlLevel=3&map_type=TYPE_MAP"
+      width="100%"
+      height="400"
+      frameborder="0"
+      style="border:0;"
       allowfullscreen>
     </iframe>
-    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/location.png" width="100%" />
   </div>
 
 
@@ -298,8 +298,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('show');
-        } else {
-          entry.target.classList.remove('show');
+          observer.unobserve(entry.target);
         }
     });
   }, {
