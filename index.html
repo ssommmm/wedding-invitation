@@ -40,7 +40,7 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 4px;
       padding: 0px;
     }
@@ -70,12 +70,16 @@
     #lightbox img {
       width:90%;
       max-width:500px;
-      border-radius:10px;
+      border-radius:6px;
+    }
+
+    .button {
+      display: flex;
+      gap: 272px;
     }
 
     .btn {
-      display: inline-block;
-      padding: 10px 20px;
+      padding: 10px 10px;
       border-radius: 30px;
       background: #3056d3;
       color: white;
@@ -85,18 +89,26 @@
     }
 
     .copy-btn {
-      padding: 6px 12px;
-      background: #ccc;
+      background: #fff;
+      color: #444;
+      border: #333;
+      padding: 8px 20px;
       border-radius: 20px;
+      cursor: pointer;
       font-size: 13px;
-      margin-left: 5px;
+      transition: all 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: #f1f1f1;
+      border: #222;
     }
 
     .account-box {
-      width: 90%;
+      width: 80%;
       background: #f6f6f6;
-      margin: 15px auto;
-      padding: 15px;
+      margin: 20px auto;
+      padding: 24px;
       border-radius: 12px;
       text-align: left;
       font-size: 15px;
@@ -114,7 +126,7 @@
       border-radius: 30px;
       background: #f1f1f1;
       display: block;
-      width: 70%;
+      width: 60%;
       margin-left: auto;
       margin-right: auto;
     }
@@ -138,14 +150,13 @@
 
   <!-- Couple Section -->
   <div class="section">
-    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_1.png" style="width:50%;" />
-    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_2.png" style="width:50%;" />
+    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_1.png" style="width:50%;" /></a>
+    <a img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_2.png" style="width:50%;" />
     <br><br>
-
-    <div>
+    
+    <div class="button">
       <a href="tel:01000000000" class="btn" style="width:50%;" >연락하기</a>
       <a href="tel:01000000000" class="btn" style="width:50%;" >연락하기</a>
-    </div>
   </div>
 
   <!-- Gallery -->
