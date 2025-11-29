@@ -29,6 +29,14 @@
       margin-bottom: 60px;
     }
 
+      .section-1 {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+      will-change: opacity, transform;
+      margin-bottom: 0px;
+    }
+
     .section.show {
       opacity: 1;
       transform: translateY(0);
@@ -132,7 +140,7 @@
 
     .copy-btn {
       background: #fff;
-      height: 24px;
+      height: 32px;
       color: #444;
       border: 1px solid #444;
       padding: 8px 12px;
@@ -208,7 +216,7 @@
       margin: 0 auto 0 auto;  /* 하단 마진 제거 */
       padding: 16px;
       border-radius: 10px;
-      background: linear-gradient(to right, #CBCBCB, #DBDBDB, #C4C4C4);
+      background: linear-gradient(to right, #DCDCDC, #EBEBEB, #DCDCDC);
       color: #333;
       font-size: 15px;
       cursor: pointer;
@@ -377,7 +385,7 @@
   </div>
 
   <!-- 계좌번호 아코디언 Section -->
-  <div class="section" style="background: #F8F8F8; padding: 0 0 60px 0;">
+  <div class="section-1" style="background: #F8F8F8; padding: 0 0 60px 0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/account.png" style="width: 100%; display: block; margin: 0 auto 0 auto;" />
 
     <div class="accordion" style="width: 80%; margin: 0 auto;">
