@@ -147,16 +147,9 @@
 
     .account-box {
       padding: 16px;
-      background: linear-gradient(
-       to bottom,
-       #E5E5E5 0%,
-       #DBDBDB 25%,
-       #ECECEC 37%,
-       #D2D2D2 72%,
-       #E5E5E5 100%
-      );
       border-bottom: 1px solid #ddd;
       font-size: 15px;
+      border-bottom: none;
       display: flex;  
     }
 
@@ -211,9 +204,16 @@
       width: 80%;
       margin: 0 auto 0 auto;  /* 하단 마진 제거 */
       padding: 10px;
-      border-radius: 8px;
-      background: #3056d3;
-      color: #fff;
+      border-radius: 12px;
+      background: linear-gradient(
+       to bottom,
+       #E5E5E5 0%,
+       #DBDBDB 25%,
+       #ECECEC 37%,
+       #D2D2D2 72%,
+       #E5E5E5 100%
+      );
+      color: #333;
       font-size: 15px;
       cursor: pointer;
       display: block;
@@ -278,20 +278,21 @@
     }
 
     .share-btn {
-      width: 100%;
+      width: 85%;
       padding: 20px;
       border-radius: 0;
-      background: #444;
-      color: #fff;
+      background: #f1f1f1;
+      color: #333;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       border: none;
       transition: all 0.3s;
+      border-radius: 12px;
     }
 
     .share-btn:hover {
-      background: #333;
+      background: #e8e8e8;
     }
   </style>
 </head>
@@ -314,8 +315,10 @@
   <!-- Couple Section -->
   <div class="section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_title.png" style="width:100%;" />
+    <br>
+    <br>
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple.png" style="width:100%;" />
-
+    <br>
     <div class="button large-gap">
       <div>
         <a href="tel:01045641578" class="btn">신랑에게 연락하기</a>
@@ -349,8 +352,8 @@
 
   <!-- Location -->
   <div class="section large-gap">
-    <h2 style="text-align:center; color:#3056d3;">오시는 길</h2>
-    
+    <h3 style="text-align:center; color:#333;">오시는 길</h3>
+    <br>
     <!-- 구글 지도 -->
     <div class="map-container">
       <iframe
@@ -359,7 +362,8 @@
         loading="lazy">
       </iframe>
     </div>
-    
+    <br>
+    <br>
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/location.png" style="width:100%;" />
 
     <!-- 네비게이션 버튼 -->
@@ -377,7 +381,7 @@
   </div>
 
   <!-- 계좌번호 아코디언 Section -->
-  <div class="section" style="background: #F8F8F8; padding: 0 0 40px 0;">
+  <div class="section" style="background: #F8F8F8; padding: 0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/account.png" style="width: 100%; display: block; margin: 0 auto 20px auto;" />
 
     <div class="accordion" style="width: 80%; margin: 0 auto;">
@@ -444,7 +448,7 @@
   </div>
 
   <!-- 공유하기 -->
-  <div class="share-box">
+  <div class="section share-box">
     <button class="share-btn" onclick="copyLink()">🔗 링크 주소 복사하기</button>
   </div>
 
