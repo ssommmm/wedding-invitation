@@ -133,7 +133,7 @@
     .copy-btn {
       background: #fff;
       color: #444;
-      border: 1px solid #ddd;
+      border: 1px solid #444;
       padding: 8px 16px;
       border-radius: 20px;
       cursor: pointer;
@@ -146,6 +146,7 @@
     }
 
     .account-box {
+      background: #fff;
       padding: 16px;
       border-bottom: 1px solid #ddd;
       font-size: 15px;
@@ -177,17 +178,17 @@
 
     .rsvp-btn {
       position: absolute;
-      bottom: 50px;
+      bottom: 60px;
       left: 50%;
       transform: translateX(-50%);
       padding: 12px 28px;
-      font-size: 14px;
+      font-size: 15px;
       background: #fff;
       color: #3056d3;
       border: 2px solid #3056d3;
       border-radius: 30px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       z-index: 10;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       white-space: nowrap;
@@ -204,7 +205,7 @@
       width: 80%;
       margin: 0 auto 0 auto;  /* 하단 마진 제거 */
       padding: 10px;
-      border-radius: 12px;
+      border-radius: 10px;
       background: #3056d3;
       color: #fff;
       font-size: 15px;
@@ -217,7 +218,7 @@
     /* 아코디언이 열렸을 때만 상단 마진 */
     .accordion-content.open {
       margin-top: 10px;
-      border-radius: 8px;
+      border-radius: 10px;
       border: 1px solid #ddd;
     }
 
@@ -271,9 +272,9 @@
     }
 
     .share-btn {
-      width: 90%;
+      width: 100%;
       padding: 20px;
-      border-radius: 12px;
+      border-radius: 0;
       background: #f1f1f1;
       color: #333;
       font-size: 15px;
@@ -302,15 +303,13 @@
   </div>
 
   <!-- Date Section -->
-  <div class="section">
+  <div class="section large-gap">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/date.png" style="width:100%;" />
   </div>
 
   <!-- Couple Section -->
   <div class="section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_title.png" style="width:100%;" />
-    <br>
-    <br>
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple.png" style="width:100%;" />
     <br>
     <div class="button large-gap">
@@ -387,7 +386,7 @@
           <br>
           예금주 홍길동
           </div>
-          <button class="copy-btn">복사</button>  <!-- 오른쪽: 버튼 -->
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>  <!-- 오른쪽: 버튼 -->
         </div>
 
         <div class="account-box">
