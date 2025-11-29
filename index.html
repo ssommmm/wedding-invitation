@@ -134,7 +134,7 @@
       background: #fff;
       color: #444;
       border: 1px solid #ddd;
-      padding: 8px 4px;
+      padding: 8px 16px;
       border-radius: 20px;
       cursor: pointer;
       font-size: 13px;
@@ -147,7 +147,13 @@
 
     .account-box {
       padding: 16px;
-      background: #f6f6f6;
+      background: linear-gradient(
+       to bottom,
+       #E5E5E5 0%,
+       #DBDBDB 25%,
+       #ECECEC 37%,
+       #D2D2D2 72%,
+       #E5E5E5 100%
       border-bottom: 1px solid #ddd;
       font-size: 15px;
       border-bottom: none;
@@ -156,6 +162,7 @@
 
     .account-info {
       flex: 1;  /* 텍스트가 남은 공간 차지 */
+      line-height: 1.8
     }
 
     .account-box:last-child {
@@ -275,8 +282,8 @@
       width: 100%;
       padding: 20px;
       border-radius: 0;
-      background: #f6f6f6;
-      color: #333;
+      background: #444;
+      color: #fff;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
@@ -285,7 +292,7 @@
     }
 
     .share-btn:hover {
-      background: #e8e8e8;
+      background: #333;
     }
   </style>
 </head>
@@ -354,7 +361,7 @@
       </iframe>
     </div>
     
-    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_text.png" style="width:100%;" />
+    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/location.png" style="width:100%;" />
 
     <!-- 네비게이션 버튼 -->
     <div class="map-buttons">
@@ -402,7 +409,6 @@
         </div>
       </div>
     </div>
-    <br>
     <br>
     
     <div class="accordion" style="width: 80%; margin: 0 auto;">
