@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>우리 결혼식에 초대합니다</title>
 
+  <meta property="og:title" content="우리 결혼식에 초대합니다" />
+  <meta property="og:description" content="기억에 남을 우리의 하루, 함께해 주세요" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/main.jpg" />
+  <meta property="og:url" content="https://ssommmm.github.io/wedding-invitation/" />
+
   <style>
     body {
       font-family: 'Pretendard', sans-serif;
@@ -12,17 +17,23 @@
       background: #fff;
       color: #333;
       overflow-x: hidden;
-      display: flex;
-      justify-content: center;
+      max-width: 430px;  /* 아이폰 14 Pro 기준 고정 */
+      margin: 0 auto;
     }
 
-    /* 전체 고정 레이아웃 */
-    .wrap {
-      width: 100%;
-      max-width: 430px;
-      margin: 0 auto;
-      position: relative;
+    .section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+      will-change: opacity, transform;
+      margin-bottom: 60px;  /* 섹션 간 간격 */
     }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
 
     .main-img {
       width: 100%;
@@ -35,24 +46,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .section {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
-      margin: 60px 0; /* 섹션 간격 */
-      will-change: opacity, transform;
-    }
-
-    .section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* 갤러리 */
     .gallery {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 4px;
+      padding: 0px;
     }
 
     .gallery-item {
@@ -61,11 +59,12 @@
       position: relative;
     }
 
+    /* 첫 번째 사진만 가로로 넓게 */
     .gallery-item:first-child {
       grid-column: 1 / -1;
       aspect-ratio: 16 / 9;
     }
-
+    
     .gallery img {
       width: 100%;
       height: 100%;
@@ -73,39 +72,46 @@
       cursor: pointer;
       transition: transform 0.5s ease;
     }
-
+    
     .gallery img:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
 
-    /* 이미지 확대 (Lightbox) */
+    /* 확대보기 - 중앙 정렬 */
     #lightbox {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.85);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 999;
+      z-index: 9999;
     }
-
     #lightbox img {
-      width: 90%;
-      max-width: 500px;
-      border-radius: 8px;
+      max-width: 90%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
     }
 
-    /* 버튼 */
     .button {
       display: flex;
-      justify-content: space-between;
-      padding: 0 30px;
-      margin-top: 20px;
+      width: 100%;
+      margin: 0 auto;
     }
+    
+    .button > div {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+   }
 
     .btn {
-      padding: 10px 22px;
+      padding: 10px 20px;
       border-radius: 30px;
       background: #3056d3;
       color: white;
@@ -113,114 +119,162 @@
       font-size: 15px;
     }
 
-    /* RSVP 버튼 */
-    .rsvp-wrap {
+    .copy-btn {
+      background: #fff;
+      color: #444;
+      border: #333;
+      padding: 8px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: #f1f1f1;
+      border: #222;
+    }
+
+    .account-box {
+      width: 80%;
+      background: #f6f6f6;
+      margin: 20px auto;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    /* 공유 버튼 */
+    .share-box {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .share-btn {
+      margin: 5px 0;
+      padding: 10px 18px;
+      border-radius: 30px;
+      background: #f1f1f1;
+      display: block;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+      cursor: pointer;
+    }
+
+    /* RSVP 섹션 - 고정 높이 */
+    .rsvp-section {
       position: relative;
       width: 100%;
+      height: 600px;  /* 고정 높이 */
+    }
+
+    .rsvp-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .rsvp-btn {
       position: absolute;
-      bottom: 40px;
+      bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 12px 24px;
-      font-size: 15px;
+      padding: 14px 30px;
+      font-size: 16px;
       background: #fff;
       color: #3056d3;
-      border: 1px solid #3056d3;
+      border: 2px solid #3056d3;
       border-radius: 30px;
       text-decoration: none;
-    }
-
-    /* 계좌 */
-    .account-box {
-      width: 85%;
-      background: #f6f6f6;
-      margin: 12px auto;
-      padding: 18px;
-      border-radius: 12px;
-      font-size: 15px;
-    }
-
-    .copy-btn {
-      background: #fff;
-      color: #333;
-      padding: 6px 14px;
-      border-radius: 15px;
-      cursor: pointer;
-      border: 1px solid #777;
-      font-size: 13px;
-    }
-
-    .accordion-btn {
-      width: 85%;
-      margin: 0 auto 10px;
-      padding: 12px;
-      border-radius: 20px;
-      background: #3056d3;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      font-size: 15px;
+      font-weight: 600;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .accordion-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s ease;
+      transition: max-height 0.3s ease;
+    }
+    .accordion-btn {
+      width: 80%;
+      margin: 0 auto 10px auto;
+      padding: 10px;
+      border-radius: 20px;
+      background: #3056d3;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      display: block;
+      text-align: center;
+      border: none;
     }
 
-    /* 지도 버튼 */
-    .map-links {
-      text-align: center;
+    /* 지도 네비 버튼 */
+    .map-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 20px;
       margin-top: 20px;
     }
 
-    .map-links a {
-      display: inline-block;
-      margin: 6px;
-      padding: 8px 14px;
-      background: #eee;
-      border-radius: 20px;
-      font-size: 14px;
+    .map-btn {
+      padding: 12px;
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      text-align: center;
       text-decoration: none;
-      color: #444;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s;
     }
 
+    .map-btn:hover {
+      background: #3056d3;
+      color: white;
+      border-color: #3056d3;
+    }
   </style>
 </head>
 
 <body>
-<div class="wrap">
 
-  <!-- 메인 이미지 -->
+  <!-- MAIN -->
   <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/main.jpg" class="main-img" />
 
-  <!-- Invitation -->
+  <!-- Invitation Section -->
   <div class="section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/invitation.png" style="width:100%;" />
   </div>
 
-  <!-- Date -->
+  <!-- Date Section -->
   <div class="section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/date.png" style="width:100%;" />
   </div>
 
-  <!-- Couple -->
+  <!-- Couple Section -->
   <div class="section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple.png" style="width:100%;" />
+    <br><br>
 
     <div class="button">
-      <a href="tel:01000000000" class="btn">신랑 연락</a>
-      <a href="tel:01000000000" class="btn">신부 연락</a>
+      <div>
+        <a href="tel:01000000000" class="btn">연락하기</a>
+      </div>
+      <div>
+        <a href="tel:01000000000" class="btn">연락하기</a>
+      </div>
     </div>
   </div>
 
   <!-- Gallery -->
   <div class="section">
-    <h2 style="text-align:center; color:#3056d3;">Gallery</h2>
+    <h2 style="color:#3056d3; text-align: center;">Gallery</h2>
     <div class="gallery">
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" /></div>
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" /></div>
@@ -228,6 +282,9 @@
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery4.jpg" /></div>
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery5.jpg" /></div>
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery6.jpg" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" /></div>
     </div>
   </div>
 
@@ -239,99 +296,145 @@
   <!-- Location -->
   <div class="section">
     <h2 style="text-align:center; color:#3056d3;">Location</h2>
+    
+    <!-- 구글 지도 -->
+      <iframe
+        src="https://www.google.com/maps?q=경남 진주시 논개길 103&output=embed"
+        allowfullscreen
+      ></iframe>
 
-    <!-- Google Maps -->
-    <iframe
-      width="100%"
-      height="350"
-      style="border:0; border-radius:10px;"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps?q=경남%20진주시%20논개길%20103&output=embed">
-    </iframe>
+    <p style="text-align:center; margin: 20px 0; color: #666;">
+      경상남도 진주시 논개길 103<br>
+      동방호텔 3층 그랜드볼룸
+    </p>
 
-    <!-- 길찾기 버튼 -->
-    <div class="map-links">
-      <a href="https://map.naver.com/p/dir/경남%20진주시%20논개길%20103" target="_blank">네이버 길찾기</a>
-      <a href="kakaonavi://navigate?dest_lat=35.180187&dest_lng=128.108328&name=논개길103">카카오내비</a>
-      <a href="tmap://route?goalname=논개길103&goalx=128.108328&goaly=35.180187">티맵 길찾기</a>
+    <!-- 네비게이션 버튼 -->
+    <div class="map-buttons">
+      <a href="https://map.naver.com/v5/directions?destination=128.084319,35.191644"
+         target="_blank">
+         네이버 길찾기
+      </a>
+
+      <a href="https://map.kakao.com/link/to/동방호텔,35.191644,128.084319"
+         target="_blank">
+         카카오맵 길찾기
+      </a>
+
+      <a href="tmap://route?goalx=128.084319&goaly=35.191644&goalname=동방호텔">
+         티맵 길찾기
+      </a>
     </div>
   </div>
 
-  <!-- 계좌정보 -->
+
+  <!-- 계좌번호 아코디언 Section -->
   <div class="section">
     <h2 style="text-align:center; color:#3056d3;">계좌 정보</h2>
-    <button class="accordion-btn">계좌 정보 보기</button>
 
-    <div class="accordion-content">
+    <div class="accordion">
+      <button class="accordion-btn">계좌 정보 보기</button>
+      <div class="accordion-content">
+        <div class="account-box">
+          <strong>신랑측 계좌</strong><br>
+          기업은행 00-0000-00  
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
+          예금주 홍길동
+        </div>
 
-      <div class="account-box">
-        <strong>신랑측 계좌</strong><br>
-        기업은행 00-0000-00 
-        <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
-        예금주 홍길동
+        <div class="account-box">
+          <strong>신부측 계좌</strong><br>
+          기업은행 00-0000-00  
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
+          예금주 홍길동
+        </div>
+
+        <div class="account-box">
+          <strong>공동 계좌</strong><br>
+          국민은행 00-0000-00  
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
+          예금주 홍길동
+        </div>
       </div>
-
-      <div class="account-box">
-        <strong>신부측 계좌</strong><br>
-        기업은행 00-0000-00 
-        <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
-        예금주 홍길동
-      </div>
-
     </div>
   </div>
 
   <!-- RSVP -->
-  <div class="section rsvp-wrap">
-    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/rsvp.png" style="width:100%;" />
+  <div class="section rsvp-section">
+    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/rsvp.png" />
     <a href="https://forms.gle/M734cHHLjnXcgyCE8" class="rsvp-btn">✔ 참석 의사 전달하기</a>
   </div>
 
-</div>
+  <!-- 공유하기 -->
+  <div class="share-box section">
+    <div class="share-btn" onclick="shareKakao()">💛 카카오톡으로 공유하기</div>
+    <div class="share-btn" onclick="copyLink()">🔗 링크 주소 복사하기</div>
+  </div>
 
-<script>
-  /* 스크롤 애니메이션 */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-        observer.unobserve(entry.target);
-      }
+  <script>
+    /* 스크롤 애니메이션 */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        } else {
+          entry.target.classList.remove('show');
+        }
+      });
+    }, {
+      threshold: 0.15  
     });
-  }, { threshold: 0.2 });
 
-  document.querySelectorAll('.section').forEach(sec => observer.observe(sec));
-
-  /* 갤러리 확대 */
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-
-  document.querySelectorAll(".gallery img").forEach(img => {
-    img.addEventListener("click", () => {
-      lightboxImg.src = img.src;
-      lightbox.style.display = "flex";
-      document.body.style.overflow = "hidden";
+    document.querySelectorAll('.section').forEach(sec => {
+      observer.observe(sec);
     });
-  });
 
-  lightbox.addEventListener("click", () => {
-    lightbox.style.display = "none";
-    document.body.style.overflow = "auto";
-  });
+    /* 갤러리 확대 - 화면 중앙에 표시 */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    
+    document.querySelectorAll(".gallery img").forEach(img => {
+      img.addEventListener("click", (e) => {
+        e.preventDefault();
+        lightboxImg.src = img.src;
+        lightbox.style.display = "flex";
+        document.body.style.overflow = "hidden"; // 스크롤 방지
+      });
+    });
+    
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+      document.body.style.overflow = ""; // 스크롤 복원
+    });
 
-  /* 복사 */
-  function copyText(text) {
-    navigator.clipboard.writeText(text);
-    alert("복사되었습니다!");
-  }
+    /* 복사 */
+    function copyText(text) {
+      navigator.clipboard.writeText(text);
+      alert("복사되었습니다!");
+    }
 
-  /* 아코디언 */
-  document.querySelector('.accordion-btn').addEventListener('click', function () {
-    const content = this.nextElementSibling;
-    content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + "px";
-  });
+    /* 링크 복사 */
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href);
+      alert("링크가 복사되었습니다!");
+    }
 
-</script>
+    /* 카카오 공유 */
+    function shareKakao() {
+      alert("카카오톡 공유는 실제 도메인 연결 후 카카오 개발자 등록이 필요합니다!");
+    }
+
+    /* 아코디언 */
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
