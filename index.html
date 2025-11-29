@@ -111,8 +111,16 @@
       align-items: center;
     }
 
+    .button > div:first-child {
+      padding-left: 10px;   /* 왼쪽 버튼을 오른쪽으로 */
+    }
+
+    .button > div:last-child {
+      padding-right: 10px;  /* 오른쪽 버튼을 왼쪽으로 */
+    }
+
     .btn {
-      padding: 10px 20px;
+      padding: 10px 24px;
       border-radius: 30px;
       background: #3056d3;
       color: white;
@@ -316,7 +324,7 @@
     
     <!-- 구글 지도 -->
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3236.8!2d128.08!3d35.18!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDEwJzQ4LjciTiAxMjjCsDA0JzQ4LjAiRQ!5e0!3m2!1sko!2skr!4v1234567890"
+      src="https://www.google.com/maps?q=경남 진주시 논개길 103&output=embed"
       width="100%" 
       height="350" 
       style="border:0; border-radius: 12px;" 
@@ -331,21 +339,11 @@
 
     <!-- 네비게이션 버튼 -->
     <div class="map-buttons">
-      <a href="https://map.kakao.com/link/to/동방호텔,35.18,128.08" class="map-btn" target="_blank">
+      <a href="https://map.kakao.com/link/to/동방호텔,35.191644,128.084319" class="map-btn" target="_blank">
         🗺️ 카카오맵
       </a>
-      <a href="https://map.naver.com/v5/directions/-/-/place/동방호텔?c=14129887.6515035,4199194.4161812,15,0,0,0,dh" class="map-btn" target="_blank">
+      <a href="https://map.naver.com/v5/directions?destination=128.084319,35.191644" class="map-btn" target="_blank">
         🧭 네이버지도
-      </a>
-      <a href="tmap://route?goalname=동방호텔&goalx=128.08&goaly=35.18" class="map-btn" target="_blank">
-        🚗 티맵
-      </a>
-      <a href="kakaomap://route?ep=35.18,128.08&by=CAR" class="map-btn" target="_blank">
-        🚙 카카오내비
-      </a>
-      <a href="https://apis.openapi.sk.com/tmap/app/routes?appKey=l7xx0b426094444a4cb5a601ae3ba5f00ee3&name=동방호텔&lon=128.08&lat=35.18" class="map-btn" target="_blank">
-        📍 티맵내비
-      </a>
       <a href="https://www.google.com/maps/dir/?api=1&destination=35.18,128.08" class="map-btn" target="_blank">
         🌏 구글맵
       </a>
