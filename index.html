@@ -41,6 +41,10 @@
       animation: fadeUp 1.2s ease;
     }
 
+    .large-gap {
+      margin-bottom: 120px; /* 원하는 값 */
+    }
+  
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -101,7 +105,8 @@
     .button {
       display: flex;
       width: 100%;
-      margin: 20px auto;
+      margin: 0px auto;
+      margin-bottom: 40px
     }
     
     .button > div {
@@ -112,11 +117,11 @@
     }
 
     .button > div:first-child {
-      padding-left: 10px;   /* 왼쪽 버튼을 오른쪽으로 */
+      padding-left: 15px;   /* 왼쪽 버튼을 오른쪽으로 */
     }
 
     .button > div:last-child {
-      padding-right: 10px;  /* 오른쪽 버튼을 왼쪽으로 */
+      padding-right: 15px;  /* 오른쪽 버튼을 왼쪽으로 */
     }
 
     .btn {
@@ -190,7 +195,7 @@
       bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 14px 24px;
+      padding: 12px 24px;
       font-size: 15px;
       background: #fff;
       color: #3056d3;
@@ -212,7 +217,7 @@
       width: 80%;
       margin: 0 auto 10px auto;
       padding: 10px;
-      border-radius: 20px;
+      border-radius: 8px;
       background: #3056d3;
       color: #fff;
       font-size: 15px;
@@ -221,6 +226,28 @@
       text-align: center;
       border: none;
     }
+
+    /* 아코디언 내용 */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  border-radius: 8px;   /* 전체 박스 radius */
+  border: 1px solid #ddd;
+}
+
+/* 계좌박스 */
+.account-box {
+  padding: 16px;
+  background: #f6f6f6;
+  border-bottom: 1px solid #ddd; /* 계좌마다 라인 */
+  font-size: 15px;
+}
+
+/* 마지막 계좌박스는 border 제거 */
+.account-box:last-child {
+  border-bottom: none;
+}
 
     /* 지도 스타일 */
     .map-container {
@@ -289,17 +316,16 @@
 
     <div class="button">
       <div>
-        <a href="tel:01000000000" class="btn">연락하기</a>
+        <a href="tel:01045641578" class="btn">신랑에게 연락하기</a>
       </div>
       <div>
-        <a href="tel:01000000000" class="btn">연락하기</a>
+        <a href="tel:01020304405" class="btn">신부에게 연락하기</a>
       </div>
     </div>
   </div>
 
   <!-- Gallery -->
-  <div class="section">
-    <h2 style="color:#3056d3; text-align: center;">Gallery</h2>
+  <div class="section large-gap">
     <div class="gallery">
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" /></div>
       <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" /></div>
@@ -319,19 +345,18 @@
   </div>
 
   <!-- Location -->
-  <div class="section">
+  <div class="section large-gap">
     <h2 style="text-align:center; color:#3056d3;">Location</h2>
     
     <!-- 구글 지도 -->
     <iframe
-      src="https://www.google.com/maps?q=경남 진주시 논개길 103&output=embed"
-      width="100%" 
-      height="350" 
-      style="border:0; border-radius: 12px;" 
-      allowfullscreen="" 
+      src="https://www.google.com/maps?q=35.1902021,128.0926222&hl=ko&z=16&output=embed"
+      height="350"
+      style="border:0; border-radius: 12px;"
+      allowfullscreen=""
       loading="lazy">
     </iframe>
-
+    
     <p style="text-align:center; margin: 20px 0; color: #666;">
       경상남도 진주시 논개길 103<br>
       동방호텔 3층 그랜드볼룸
@@ -339,12 +364,12 @@
 
     <!-- 네비게이션 버튼 -->
     <div class="map-buttons">
-      <a href="https://map.kakao.com/link/to/동방호텔,35.191644,128.084319" class="map-btn" target="_blank">
+      <a href="https://map.kakao.com/link/to/동방관광호텔웨딩홀,35.1902021,128.0926222" class="map-btn" target="_blank">
         🗺️ 카카오맵
       </a>
-      <a href="https://map.naver.com/v5/directions?destination=128.084319,35.191644" class="map-btn" target="_blank">
+      <a href="https://map.naver.com/v5/directions?destination=128.0926222,35.1902021" class="map-btn" target="_blank">
         🧭 네이버지도
-      <a href="https://www.google.com/maps/dir/?api=1&destination=35.18,128.08" class="map-btn" target="_blank">
+      <a href="https://www.google.com/maps/dir/?api=1&destination=35.1902021,128.0926222" class="map-btn" target="_blank">
         🌏 구글맵
       </a>
     </div>
