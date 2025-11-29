@@ -150,6 +150,12 @@
       background: #f6f6f6;
       border-bottom: 1px solid #ddd;
       font-size: 15px;
+      border-bottom: none;
+      display: flex;  
+    }
+
+    .account-info {
+      flex: 1;  /* 텍스트가 남은 공간 차지 */
     }
 
     .account-box:last-child {
@@ -161,6 +167,7 @@
       position: relative;
       width: 100%;
       height: 600px;
+      margin-bottom: 0;  /* 하단 마진 제거 */
     }
 
     .rsvp-section img {
@@ -174,8 +181,8 @@
       bottom: 50px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 12px 24px;
-      font-size: 15px;
+      padding: 12px 28px;
+      font-size: 14px;
       background: #fff;
       color: #3056d3;
       border: 2px solid #3056d3;
@@ -192,13 +199,11 @@
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
-      border-radius: 8px;
-      border: 1px solid #ddd;
     }
 
     .accordion-btn {
       width: 80%;
-      margin: 0 auto 10px auto;
+      margin: 0 auto 0 auto;  /* 하단 마진 제거 */
       padding: 10px;
       border-radius: 8px;
       background: #3056d3;
@@ -210,9 +215,16 @@
       border: none;
     }
 
-    /* 지도 - 70% 너비 + 중앙 정렬 */
+    /* 아코디언이 열렸을 때만 상단 마진 */
+    .accordion-content.open {
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    /* 지도 - 85% 너비 + 중앙 정렬 */
     .map-container {
-      width: 70%;
+      width: 85%;
       margin: 0 auto;
     }
 
@@ -254,31 +266,26 @@
 
     /* 공유하기 박스 */
     .share-box {
-      background: #3056d3;
-      height: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
+      background: transparent;
       padding: 0;
+      margin: 0;
     }
 
     .share-btn {
-      padding: 14px 40px;
-      border-radius: 30px;
-      background: #fff;
-      color: #3056d3;
+      width: 100%;
+      padding: 20px;
+      border-radius: 0;
+      background: #f6f6f6;
+      color: #333;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       border: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: all 0.3s;
     }
 
     .share-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      background: #e8e8e8;
     }
   </style>
 </head>
@@ -366,28 +373,57 @@
   </div>
 
   <!-- 계좌번호 아코디언 Section -->
-  <div class="section">
-    <h2 style="text-align:center; color:#3056d3;">계좌 정보</h2>
+  <div class="section" style="background: #F8F8F8; padding: 0 0 40px 0;">
+    <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/account.png" style="width: 100%; display: block; margin: 0 auto 20px auto;" />
 
-    <div class="accordion">
-      <button class="accordion-btn">계좌 정보 보기</button>
+    <div class="accordion" style="width: 80%; margin: 0 auto;">
+      <button class="accordion-btn" style="width: 100%; margin: 0;">신랑측 계좌</button>
       <div class="accordion-content">
         <div class="account-box">
-          <strong>신랑측 계좌</strong><br>
+          <div class="account-info">
+          <strong>신랑본인</strong><br>
+          기업은행 00-0000-00  
+          <button class="copy-btn" onclick="copyText('00-0000-00')"><br>
+          예금주 홍길동
+          </div>
+          <button class="copy-btn">복사</button>  <!-- 오른쪽: 버튼 -->
+        </div>
+
+        <div class="account-box">
+          <strong>아빠</strong><br>
           기업은행 00-0000-00  
           <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
           예금주 홍길동
         </div>
 
         <div class="account-box">
-          <strong>신부측 계좌</strong><br>
+          <strong>엄마</strong><br>
+          국민은행 00-0000-00  
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
+          예금주 홍길동
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion" style="width: 80%; margin: 0 auto;">
+      <button class="accordion-btn" style="width: 100%; margin: 0;">신부측 계좌</button>
+      <div class="accordion-content">
+        <div class="account-box">
+          <strong>신부본인</strong><br>
           기업은행 00-0000-00  
           <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
           예금주 홍길동
         </div>
 
         <div class="account-box">
-          <strong>공동 계좌</strong><br>
+          <strong>아빠</strong><br>
+          기업은행 00-0000-00  
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
+          예금주 홍길동
+        </div>
+
+        <div class="account-box">
+          <strong>엄마</strong><br>
           국민은행 00-0000-00  
           <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
           예금주 홍길동
@@ -399,7 +435,7 @@
   <!-- RSVP -->
   <div class="section rsvp-section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/rsvp.png" />
-    <a href="https://forms.gle/M734cHHLjnXcgyCE8" class="rsvp-btn">✔ 참석 의사 전달하기</a>
+    <a href="https://forms.gle/M734cHHLjnXcgyCE8" class="rsvp-btn">참석 의사 전달하기</a>
   </div>
 
   <!-- 공유하기 -->
@@ -468,8 +504,10 @@
         const content = btn.nextElementSibling;
         if (content.style.maxHeight) {
           content.style.maxHeight = null;
+          content.classList.remove('open');
         } else {
           content.style.maxHeight = content.scrollHeight + "px";
+          content.classList.add('open');
         }
       });
     });
