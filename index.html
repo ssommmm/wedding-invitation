@@ -17,7 +17,7 @@
       background: #fff;
       color: #333;
       overflow-x: hidden;
-      max-width: 430px;  /* 아이폰 14 Pro 기준 고정 */
+      max-width: 430px;
       margin: 0 auto;
     }
 
@@ -26,14 +26,13 @@
       transform: translateY(40px);
       transition: all 0.8s ease;
       will-change: opacity, transform;
-      margin-bottom: 60px;  /* 섹션 간 간격 */
+      margin-bottom: 60px;
     }
 
     .section.show {
       opacity: 1;
       transform: translateY(0);
     }
-
 
     .main-img {
       width: 100%;
@@ -42,7 +41,7 @@
     }
 
     .large-gap {
-      margin-bottom: 120px; /* 원하는 값 */
+      margin-bottom: 120px;
     }
   
     @keyframes fadeUp {
@@ -63,7 +62,6 @@
       position: relative;
     }
 
-    /* 첫 번째 사진만 가로로 넓게 */
     .gallery-item:first-child {
       grid-column: 1 / -1;
       aspect-ratio: 16 / 9;
@@ -81,7 +79,6 @@
       transform: scale(1.15);
     }
 
-    /* 확대보기 - 중앙 정렬 */
     #lightbox {
       position: fixed;
       top: 0;
@@ -106,7 +103,7 @@
       display: flex;
       width: 100%;
       margin: 0px auto;
-      margin-bottom: 40px
+      margin-bottom: 40px;
     }
     
     .button > div {
@@ -117,11 +114,11 @@
     }
 
     .button > div:first-child {
-      padding-left: 15px;   /* 왼쪽 버튼을 오른쪽으로 */
+      padding-left: 15px;
     }
 
     .button > div:last-child {
-      padding-right: 15px;  /* 오른쪽 버튼을 왼쪽으로 */
+      padding-right: 15px;
     }
 
     .btn {
@@ -136,7 +133,7 @@
     .copy-btn {
       background: #fff;
       color: #444;
-      border: #333;
+      border: 1px solid #ddd;
       padding: 8px 20px;
       border-radius: 20px;
       cursor: pointer;
@@ -146,42 +143,24 @@
 
     .copy-btn:hover {
       background: #f1f1f1;
-      border: #222;
     }
 
     .account-box {
-      width: 80%;
+      padding: 16px;
       background: #f6f6f6;
-      margin: 20px auto;
-      padding: 24px;
-      border-radius: 12px;
-      text-align: left;
+      border-bottom: 1px solid #ddd;
       font-size: 15px;
     }
 
-    /* 공유 버튼 */
-    .share-box {
-      margin: 40px 0;
-      text-align: center;
+    .account-box:last-child {
+      border-bottom: none;
     }
 
-    .share-btn {
-      margin: 5px 0;
-      padding: 10px 18px;
-      border-radius: 30px;
-      background: #f1f1f1;
-      display: block;
-      width: 60%;
-      margin-left: auto;
-      margin-right: auto;
-      cursor: pointer;
-    }
-
-    /* RSVP 섹션 - 고정 높이 */
+    /* RSVP */
     .rsvp-section {
       position: relative;
       width: 100%;
-      height: 600px;  /* 고정 높이 */
+      height: 600px;
     }
 
     .rsvp-section img {
@@ -205,14 +184,18 @@
       font-weight: 600;
       z-index: 10;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      white-space: nowrap;  /* 한 줄로 유지 */
+      white-space: nowrap;
     }
 
+    /* 아코디언 */
     .accordion-content {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
+      border-radius: 8px;
+      border: 1px solid #ddd;
     }
+
     .accordion-btn {
       width: 80%;
       margin: 0 auto 10px auto;
@@ -227,43 +210,20 @@
       border: none;
     }
 
-    /* 아코디언 내용 */
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  border-radius: 8px;   /* 전체 박스 radius */
-  border: 1px solid #ddd;
-}
-
-/* 계좌박스 */
-.account-box {
-  padding: 16px;
-  background: #f6f6f6;
-  border-bottom: 1px solid #ddd; /* 계좌마다 라인 */
-  font-size: 15px;
-}
-
-/* 마지막 계좌박스는 border 제거 */
-.account-box:last-child {
-  border-bottom: none;
-}
-
-    /* 지도 스타일 */
+    /* 지도 - 70% 너비 + 중앙 정렬 */
     .map-container {
       width: 70%;
       margin: 0 auto;
-      border-radius: 12px;
-      overflow: hidden;
     }
 
     .map-container iframe {
       width: 100%;
       height: 300px;
       border: none;
+      border-radius: 12px;
     }
 
-    /* 지도 네비 버튼 - 공유하기 스타일 */
+    /* 지도 버튼 */
     .map-buttons {
       display: flex;
       gap: 8px;
@@ -290,6 +250,35 @@
 
     .map-btn:hover {
       background: #e0e0e0;
+    }
+
+    /* 공유하기 박스 */
+    .share-box {
+      background: #3056d3;
+      height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .share-btn {
+      padding: 14px 40px;
+      border-radius: 30px;
+      background: #fff;
+      color: #3056d3;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+    }
+
+    .share-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
     }
   </style>
 </head>
@@ -349,13 +338,13 @@
     <h2 style="text-align:center; color:#3056d3;">Location</h2>
     
     <!-- 구글 지도 -->
-    <iframe
-      src="https://www.google.com/maps?q=35.1902021,128.0926222&hl=ko&z=16&output=embed"
-      height="350"
-      style="border:0; border-radius: 12px;"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps?q=35.1902021,128.0926222&hl=ko&z=16&output=embed"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
     
     <p style="text-align:center; margin: 20px 0; color: #666;">
       경상남도 진주시 논개길 103<br>
@@ -364,17 +353,17 @@
 
     <!-- 네비게이션 버튼 -->
     <div class="map-buttons">
+      <button class="map-btn" onclick="copyAddress()">
+        📍 주소 복사하기
+      </button>
       <a href="https://map.kakao.com/link/to/동방관광호텔웨딩홀,35.1902021,128.0926222" class="map-btn" target="_blank">
         🗺️ 카카오맵
       </a>
-      <a href="https://map.naver.com/v5/directions?destination=128.0926222,35.1902021" class="map-btn" target="_blank">
-        🧭 네이버지도
       <a href="https://www.google.com/maps/dir/?api=1&destination=35.1902021,128.0926222" class="map-btn" target="_blank">
         🌏 구글맵
       </a>
     </div>
   </div>
-
 
   <!-- 계좌번호 아코디언 Section -->
   <div class="section">
@@ -414,9 +403,8 @@
   </div>
 
   <!-- 공유하기 -->
-  <div class="share-box section">
-    <div class="share-btn" onclick="shareKakao()">💛 카카오톡으로 공유하기</div>
-    <div class="share-btn" onclick="copyLink()">🔗 링크 주소 복사하기</div>
+  <div class="share-box">
+    <button class="share-btn" onclick="copyLink()">🔗 링크 주소 복사하기</button>
   </div>
 
   <script>
@@ -437,7 +425,7 @@
       observer.observe(sec);
     });
 
-    /* 갤러리 확대 - 화면 중앙에 표시 */
+    /* 갤러리 확대 */
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
     
@@ -446,16 +434,23 @@
         e.preventDefault();
         lightboxImg.src = img.src;
         lightbox.style.display = "flex";
-        document.body.style.overflow = "hidden"; // 스크롤 방지
+        document.body.style.overflow = "hidden";
       });
     });
     
     lightbox.addEventListener("click", () => {
       lightbox.style.display = "none";
-      document.body.style.overflow = ""; // 스크롤 복원
+      document.body.style.overflow = "";
     });
 
-    /* 복사 */
+    /* 주소 복사 */
+    function copyAddress() {
+      const address = "경상남도 진주시 논개길 103 동방호텔 3층 그랜드볼룸";
+      navigator.clipboard.writeText(address);
+      alert("주소가 복사되었습니다!\n" + address);
+    }
+
+    /* 계좌번호 복사 */
     function copyText(text) {
       navigator.clipboard.writeText(text);
       alert("복사되었습니다!");
@@ -465,11 +460,6 @@
     function copyLink() {
       navigator.clipboard.writeText(window.location.href);
       alert("링크가 복사되었습니다!");
-    }
-
-    /* 카카오 공유 */
-    function shareKakao() {
-      alert("카카오톡 공유는 실제 도메인 연결 후 카카오 개발자 등록이 필요합니다!");
     }
 
     /* 아코디언 */
