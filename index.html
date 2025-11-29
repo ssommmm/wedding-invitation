@@ -134,11 +134,12 @@
       background: #fff;
       color: #444;
       border: 1px solid #444;
-      padding: 8px 16px;
+      padding: 8px 12px;
       border-radius: 20px;
       cursor: pointer;
       font-size: 13px;
       transition: all 0.3s;
+      box-shadow: 0 2px 2px rgba(0,0,0,0.15);
     }
 
     .copy-btn:hover {
@@ -156,6 +157,7 @@
 
     .account-info {
       flex: 1;  /* 텍스트가 남은 공간 차지 */
+      line-height: 1.8;
     }
 
     .account-box:last-child {
@@ -183,9 +185,8 @@
       transform: translateX(-50%);
       padding: 12px 28px;
       font-size: 15px;
-      background: #fff;
-      color: #3056d3;
-      border: 2px solid #3056d3;
+      background: #3056d3;
+      color: #fff;
       border-radius: 30px;
       text-decoration: none;
       font-weight: 700;
@@ -204,10 +205,10 @@
     .accordion-btn {
       width: 80%;
       margin: 0 auto 0 auto;  /* 하단 마진 제거 */
-      padding: 10px;
+      padding: 16px;
       border-radius: 10px;
-      background: linear-gradient(to bottom, #f7f5ef, #ece7df);
-      color: #fff;
+      background: linear-gradient(to right, #E5E5E5, #ECECEC, #E5E5E5)
+      color: #333;
       font-size: 15px;
       cursor: pointer;
       display: block;
@@ -217,7 +218,7 @@
 
     /* 아코디언이 열렸을 때만 상단 마진 */
     .accordion-content.open {
-      margin-top: 10px;
+      margin-top: 8px;
       border-radius: 10px;
       border: 1px solid #ddd;
     }
@@ -312,7 +313,8 @@
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_title.png" style="width:100%;" />
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple.png" style="width:100%;" />
     <br>
-    <div class="button large-gap">
+    <br>
+    <div class="button">
       <div>
         <a href="tel:01045641578" class="btn">신랑에게 연락하기</a>
       </div>
@@ -390,17 +392,23 @@
         </div>
 
         <div class="account-box">
+          <div class="account-info">
           <strong>아빠</strong><br>
           기업은행 00-0000-00  
-          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
+          <br>
           예금주 홍길동
+          </div>
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>  <!-- 오른쪽: 버튼 -->
         </div>
 
         <div class="account-box">
+          <div class="account-info">
           <strong>엄마</strong><br>
-          국민은행 00-0000-00  
-          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button><br>
+          기업은행 00-0000-00  
+          <br>
           예금주 홍길동
+          </div>
+          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>  <!-- 오른쪽: 버튼 -->
         </div>
       </div>
     </div>
