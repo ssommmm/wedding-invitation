@@ -156,7 +156,7 @@
       padding: 16px;
       border-bottom: 1px solid #ddd;
       font-size: 15px;
-      border-bottom: none;
+      border-bottom: 1px solid #eee;
       display: flex;  
     }
 
@@ -233,12 +233,13 @@
 
     /* 화살표 아이콘 */
     .accordion-btn::after {
-      content: '';   /* 기본: 아래 화살표 */
+      content: "▼";   /* 기본: 아래 화살표 */
       position: absolute;
       right: 16px;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(-50%) scaleY(0.6);
       font-size: 12px;
+      color: #777;
       transition: transform 0.3s ease;
     }
 
