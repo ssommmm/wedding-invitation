@@ -240,12 +240,12 @@
       transform: translateY(-50%) scaleY(0.6);
       font-size: 12px;
       color: #777;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
     /* 열렸을 때 화살표 위로 회전 */
     .accordion-btn.active::after {
-      transform: translateY(-50%) rotate(180deg);
+      transform: translateY(-50%) scaleY(0.6) rotate(180deg);
     }
 
     /* 지도 - 85% 너비 + 중앙 정렬 */
@@ -319,6 +319,9 @@
 </head>
 
 <body>
+  <audio autoplay loop volume="0.3">
+    <source src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/bgm.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- MAIN -->
   <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/main.jpg" class="main-img" />
@@ -410,7 +413,7 @@
         <div class="account-box">
           <div class="account-info">
           <strong>신랑</strong><br>
-          기업은행 00-0000-00  
+          농협은행 00-0000-00  
           <br>
           예금주 윤동섭
           </div>
@@ -420,7 +423,7 @@
         <div class="account-box">
           <div class="account-info">
           <strong>신랑혼주</strong><br>
-          기업은행 00-0000-00  
+          농협은행 00-0000-00  
           <br>
           예금주 윤원상
           </div>
@@ -430,7 +433,7 @@
         <div class="account-box">
           <div class="account-info">
           <strong>신랑혼주</strong><br>
-          기업은행 00-0000-00  
+          농협은행 00-0000-00  
           <br>
           예금주 이경희
           </div>
@@ -446,31 +449,31 @@
         <div class="account-box">
           <div class="account-info">
           <strong>신부</strong><br>
-          기업은행 00-0000-00  
+          기업은행 010-2030-4405  
           <br>
           예금주 박소민
           </div>
-          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <button class="copy-btn" onclick="copyText('01020304405')">복사</button>  <!-- 오른쪽: 버튼 -->
         </div>
 
         <div class="account-box">
           <div class="account-info">
           <strong>신부혼주</strong><br>
-          기업은행 00-0000-00  
+          농협은행 130-12-000014
           <br>
           예금주 박은영
           </div>
-          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <button class="copy-btn" onclick="copyText('13012000014')">복사</button>  <!-- 오른쪽: 버튼 -->
         </div>
 
         <div class="account-box">
           <div class="account-info">
           <strong>신부혼주</strong><br>
-          기업은행 00-0000-00  
+          농협은행 803-01-349954
           <br>
           예금주 민혜경
           </div>
-          <button class="copy-btn" onclick="copyText('00-0000-00')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <button class="copy-btn" onclick="copyText('80301349954')">복사</button>  <!-- 오른쪽: 버튼 -->
         </div>
       </div>
     </div>
