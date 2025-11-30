@@ -233,7 +233,7 @@
 
     /* 화살표 아이콘 */
     .accordion-btn::after {
-      content: "▼";   /* 기본: 아래 화살표 */
+      content: '';   /* 기본: 아래 화살표 */
       position: absolute;
       right: 16px;
       top: 50%;
@@ -548,25 +548,11 @@
         if (content.style.maxHeight) {
           content.style.maxHeight = null;
           content.classList.remove('open');
+          btn.classList.remove('active');
         } else {
           content.style.maxHeight = content.scrollHeight + "px";
           content.classList.add('open');
-        }
-      });
-    });
-
-    document.querySelectorAll('.accordion-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const content = btn.nextElementSibling;
-
-        if (content.style.maxHeight) {
-          content.style.maxHeight = null;
-          content.classList.remove('open');
-          btn.classList.remove('active');   // ← 화살표 원래 방향
-        } else {
-          content.style.maxHeight = content.scrollHeight + "px";
-          content.classList.add('open');
-          btn.classList.add('active');      // ← 화살표 회전
+          btn.classList.add('active');
         }
       });
     });
