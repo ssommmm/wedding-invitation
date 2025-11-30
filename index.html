@@ -219,6 +219,8 @@
       display: block;
       text-align: center;
       border: none;
+      position: relative;
+      padding-right: 32px;
     }
 
     /* 아코디언이 열렸을 때만 상단 마진 */
@@ -226,6 +228,23 @@
       margin-top: 8px;
       border-radius: 10px;
       border: 1px solid #ddd;
+      overflow: hidden;
+    }
+
+    /* 화살표 아이콘 */
+    .accordion-btn::after {
+      content: "▼";   /* 기본: 아래 화살표 */
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    /* 열렸을 때 화살표 위로 회전 */
+    .accordion-btn.active::after {
+      transform: translateY(-50%) rotate(180deg);
     }
 
     /* 지도 - 85% 너비 + 중앙 정렬 */
@@ -532,6 +551,22 @@
         } else {
           content.style.maxHeight = content.scrollHeight + "px";
           content.classList.add('open');
+        }
+      });
+    });
+
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          content.classList.remove('open');
+          btn.classList.remove('active');   // ← 화살표 원래 방향
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.classList.add('open');
+          btn.classList.add('active');      // ← 화살표 회전
         }
       });
     });
