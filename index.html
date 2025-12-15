@@ -100,7 +100,9 @@
       max-width: 90%;
       max-height: 90vh;
       object-fit: contain;
-      transform: none !important;   /* 🔥 확대 방지 */
+      touch-action: none;     /* 터치 확대 방지 */
+      user-select: none;      /* 선택 방지 */
+      pointer-events: none;   /* 드래그 방지 */
       border-radius: 6px;
       box-shadow: 0 0 30px rgba(0,0,0,0.8);
     }
@@ -329,7 +331,7 @@
   <!-- MAIN -->
   <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/main.jpg" class="main-img" />
 
-  <!-- Invitation Section --> <div class="section section-1" style="background: #FAF5ED; padding: 0;">
+  <!-- Invitation Section -->
   <div class="section section-1" style="padding: 0 0 40px 0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/invitation.jpg" style="width:100%;" />
   </div>
