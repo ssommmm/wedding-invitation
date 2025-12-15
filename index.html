@@ -388,9 +388,7 @@
 
   <!-- Lightbox -->
   <div id="lightbox">
-    <button class="nav prev">‹</button>
     <img id="lightbox-img" />
-    <button class="nav next">›</button>
   </div>
 
   <!-- Location -->
@@ -527,43 +525,22 @@
     });
 
     /* 갤러리 확대 */
-    const galleryImgs = Array.from(document.querySelectorAll(".gallery img"));
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const prevBtn = document.querySelector(".prev");
-const nextBtn = document.querySelector(".next");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
 
-let currentIndex = 0;
+    document.querySelectorAll(".gallery img").forEach(img => {
+      img.addEventListener("click", (e) => {
+        e.preventDefault();
+        lightboxImg.src = img.src;
+        lightbox.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      });
+    });
 
-galleryImgs.forEach((img, index) => {
-  img.addEventListener("click", () => {
-    currentIndex = index;
-    showImage();
-    lightbox.style.display = "flex";
-    document.body.style.overflow = "hidden";
-  });
-});
-
-function showImage() {
-  lightboxImg.src = galleryImgs[currentIndex].src;
-}
-
-prevBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length;
-  showImage();
-});
-
-nextBtn.addEventListener("click", (e) => {
-  e.stopPropagation();
-  currentIndex = (currentIndex + 1) % galleryImgs.length;
-  showImage();
-});
-
-lightbox.addEventListener("click", () => {
-  lightbox.style.display = "none";
-  document.body.style.overflow = "";
-});
+    lightbox.addEventListener("click", () => {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "";
+    });
 
     /* 주소 복사 */
     function copyAddress() {
