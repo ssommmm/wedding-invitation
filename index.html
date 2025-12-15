@@ -45,7 +45,7 @@
     }
 
     .large-gap {
-      margin-bottom: 120px;
+      margin-bottom: 100px;
     }
   
     @keyframes fadeUp {
@@ -95,13 +95,30 @@
       align-items: center;
       z-index: 9999;
     }
+    
     #lightbox img {
       max-width: 90%;
       max-height: 90vh;
       object-fit: contain;
+      transform: none !important;   /* 🔥 확대 방지 */
       border-radius: 6px;
       box-shadow: 0 0 30px rgba(0,0,0,0.8);
     }
+
+    #lightbox .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 40px;
+      cursor: pointer;
+      padding: 20px;
+    }
+
+    #lightbox .prev { left: 10px; }
+    #lightbox .next { right: 10px; }
 
     .button {
       display: flex;
@@ -128,7 +145,7 @@
     .btn {
       padding: 10px 16px;
       border-radius: 30px;
-      background: #333;
+      background: #2160C9;
       color: white;
       text-decoration: none;
       font-size: 15px;
@@ -190,7 +207,7 @@
       transform: translateX(-50%);
       padding: 12px 28px;
       font-size: 15px;
-      background: #333;
+      background: #2160C9;
       color: #fff;
       border-radius: 30px;
       text-decoration: none;
@@ -212,8 +229,8 @@
       margin: 0 auto 0 auto;  /* 하단 마진 제거 */
       padding: 16px;
       border-radius: 10px;
-      background: #FBEACF;
-      color: #222;
+      background: #333;
+      color: #fff;
       font-size: 15px;
       cursor: pointer;
       display: block;
@@ -326,8 +343,8 @@
   <!-- MAIN -->
   <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/main.jpg" class="main-img" />
 
-  <!-- Invitation Section -->
-  <div class="section section-1">
+  <!-- Invitation Section --> <div class="section section-1" style="background: #FAF5ED; padding: 0;">
+  <div class="section section-1" style="padding: 0 0 40px 0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/invitation.jpg" style="width:100%;" />
   </div>
 
@@ -371,7 +388,9 @@
 
   <!-- Lightbox -->
   <div id="lightbox">
+    <button class="nav prev">‹</button>
     <img id="lightbox-img" />
+    <button class="nav next">›</button>
   </div>
 
   <!-- Location -->
@@ -412,7 +431,7 @@
   </div>
 
   <!-- 계좌번호 아코디언 Section -->
-  <div class="section section-1" style="background: #FAF5ED; padding: 0;">
+  <div class="section section-1" style="background: #f8f8f8; padding: 0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/account.jpg" style="width: 100%; display: block; margin: 0 auto 0 auto;" />
 
     <div class="accordion" style="width: 80%; margin: 0 auto;">
@@ -508,22 +527,43 @@
     });
 
     /* 갤러리 확대 */
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    
-    document.querySelectorAll(".gallery img").forEach(img => {
-      img.addEventListener("click", (e) => {
-        e.preventDefault();
-        lightboxImg.src = img.src;
-        lightbox.style.display = "flex";
-        document.body.style.overflow = "hidden";
-      });
-    });
-    
-    lightbox.addEventListener("click", () => {
-      lightbox.style.display = "none";
-      document.body.style.overflow = "";
-    });
+    const galleryImgs = Array.from(document.querySelectorAll(".gallery img"));
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
+
+let currentIndex = 0;
+
+galleryImgs.forEach((img, index) => {
+  img.addEventListener("click", () => {
+    currentIndex = index;
+    showImage();
+    lightbox.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+});
+
+function showImage() {
+  lightboxImg.src = galleryImgs[currentIndex].src;
+}
+
+prevBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length;
+  showImage();
+});
+
+nextBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  currentIndex = (currentIndex + 1) % galleryImgs.length;
+  showImage();
+});
+
+lightbox.addEventListener("click", () => {
+  lightbox.style.display = "none";
+  document.body.style.overflow = "";
+});
 
     /* 주소 복사 */
     function copyAddress() {
