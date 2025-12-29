@@ -19,7 +19,7 @@
       overflow-x: hidden;
       max-width: 430px;
       margin: 0 auto;
-      touch-action: manipulation;
+      touch-action: pan-y;
     }
 
     .section {
@@ -84,50 +84,76 @@
       transform: scale(1.15);
     }
 
+    /* Lightbox - 슬라이드 가능 */
     #lightbox {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.95);
       display: none;
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      touch-action: pan-x;
     }
     
     #lightbox img {
       max-width: 90%;
       max-height: 90vh;
       object-fit: contain;
-      user-select: none;
       border-radius: 6px;
       box-shadow: 0 0 30px rgba(0,0,0,0.8);
+      touch-action: none;
+      user-select: none;
+      pointer-events: none;
     }
 
-    .nav {
+    /* 화살표 버튼 */
+    .lightbox-arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0,0,0,0.5);
-      color: #fff;
+      background: rgba(255,255,255,0.2);
+      color: white;
       border: none;
-      font-size: 36px;
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 10000;
+      transition: all 0.3s;
+    }
+
+    .lightbox-arrow:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    .lightbox-arrow.prev {
+      left: 20px;
+    }
+
+    .lightbox-arrow.next {
+      right: 20px;
+    }
+
+    /* 닫기 버튼 */
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 24px;
       cursor: pointer;
       z-index: 10000;
     }
-
-    .nav.prev { left: 16px; }
-    .nav.next { right: 16px; }
-
-    .nav:active {
-      background: rgba(0,0,0,0.8);
-    }
-
 
     .button {
       display: flex;
@@ -144,11 +170,11 @@
     }
 
     .button > div:first-child {
-      padding-left: 18px;
+      padding-left: 17px;
     }
 
     .button > div:last-child {
-      padding-right: 18px;
+      padding-right: 17px;
     }
 
     .btn {
@@ -187,7 +213,7 @@
     }
 
     .account-info {
-      flex: 1;  /* 텍스트가 남은 공간 차지 */
+      flex: 1;
       line-height: 1.5;
     }
 
@@ -195,12 +221,11 @@
       border-bottom: none;
     }
 
-    /* RSVP */
     .rsvp-section {
       position: relative;
       width: 100%;
       height: 600px;
-      margin-bottom: 0;  /* 하단 마진 제거 */
+      margin-bottom: 0;
     }
 
     .rsvp-section img {
@@ -226,7 +251,6 @@
       white-space: nowrap;
     }
 
-    /* 아코디언 */
     .accordion-content {
       max-height: 0;
       overflow: hidden;
@@ -235,10 +259,10 @@
 
     .accordion-btn {
       width: 80%;
-      margin: 0 auto 0 auto;  /* 하단 마진 제거 */
-      padding: 20px;
+      margin: 0 auto 0 auto;
+      padding: 16px;
       border-radius: 10px;
-      background: #383838;
+      background: #333;
       color: #fff;
       font-size: 15px;
       cursor: pointer;
@@ -249,7 +273,6 @@
       padding-right: 32px;
     }
 
-    /* 아코디언이 열렸을 때만 상단 마진 */
     .accordion-content.open {
       margin-top: 8px;
       border-radius: 10px;
@@ -257,9 +280,8 @@
       overflow: hidden;
     }
 
-    /* 화살표 아이콘 */
     .accordion-btn::after {
-      content: "▼";   /* 기본: 아래 화살표 */
+      content: "▼";
       position: absolute;
       right: 16px;
       top: 50%;
@@ -269,12 +291,10 @@
       transition: transform 0.4s ease;
     }
 
-    /* 열렸을 때 화살표 위로 회전 */
     .accordion-btn.active::after {
       transform: translateY(-50%) scaleY(0.6) rotate(180deg);
     }
 
-    /* 지도  너비 + 중앙 정렬 */
     .map-container {
       width: 100%;
       margin: 0 auto;
@@ -287,7 +307,6 @@
       border-radius: 12px;
     }
 
-    /* 지도 버튼 */
     .map-buttons {
       display: flex;
       gap: 8px;
@@ -316,7 +335,6 @@
       background: #e0e0e0;
     }
 
-    /* 공유하기 박스 */
     .share-box {
       background: transparent;
       padding: 0;
@@ -349,121 +367,79 @@
     <source src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/bgm.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- MAIN -->
   <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/main.jpg" class="main-img" />
 
-  <!-- Invitation Section -->
+  <div class="section section-1" style="background: #FAF5ED; padding: 0;">
   <div class="section section-1" style="padding: 0 0 40px 0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/invitation.jpg" style="width:100%;" />
   </div>
 
-  <!-- Date Section -->
   <div class="section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/date.jpg" style="width:100%;" />
   </div>
 
-  <!-- Couple Section -->
   <div class="section">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_title.jpg" style="width:100%;" />
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple.jpg" style="width:100%;" />
     <br>
     <div class="button">
-      <div>
-        <a href="tel:01045641578" class="btn">신랑에게 연락하기</a>
-      </div>
-      <div>
-        <a href="tel:01020304405" class="btn">신부에게 연락하기</a>
-      </div>
+      <div><a href="tel:01045641578" class="btn">신랑에게 연락하기</a></div>
+      <div><a href="tel:01020304405" class="btn">신부에게 연락하기</a></div>
     </div>
-    <br>
-    <br>
+    <br><br>
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/couple_text.jpg" style="width:100%;" />
   </div>
 
-  <!-- Gallery -->
   <div class="section large-gap">
     <div class="gallery">
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery3.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery4.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery5.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery6.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" /></div>
-      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery1.jpg" data-index="0" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery2.jpg" data-index="1" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery3.jpg" data-index="2" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery4.jpg" data-index="3" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery5.jpg" data-index="4" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery6.jpg" data-index="5" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery7.jpg" data-index="6" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery8.jpg" data-index="7" /></div>
+      <div class="gallery-item"><img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/gallery9.jpg" data-index="8" /></div>
     </div>
   </div>
 
-  <!-- Lightbox -->
   <div id="lightbox">
-    <button class="nav prev">‹</button>
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-arrow prev" onclick="prevImage()">‹</button>
     <img id="lightbox-img" />
-    <button class="nav next">›</button>
+    <button class="lightbox-arrow next" onclick="nextImage()">›</button>
   </div>
 
-  <!-- Location -->
   <div class="section large-gap">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/location_title.jpg" style="width:100%;" />
     <br>
-    <!-- 구글 지도 -->
-    <!--
-    <div class="map-container">
-      <iframe
-        src="https://www.google.com/maps?q=35.1902021,128.0926222&hl=ko&z=16&output=embed"
-        width="100%"
-        height="260"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy">
-      </iframe>
-    </div> -->
     <a href="https://www.google.com/maps/dir/?api=1&destination=35.1902021,128.0926222" target="_blank">
       <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/map2.jpg" style="width:100%;">
     </a>
-    <br>
-    <br>
+    <br><br>
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/location.jpg" style="width:100%;" />
 
-    <!-- 네비게이션 버튼 -->
     <div class="map-buttons">
-      <button class="map-btn" onclick="copyAddress()">
-        📍 주소 복사하기
-      </button>
-      <a href="https://map.kakao.com/link/to/동방관광호텔웨딩홀,35.1902021,128.0926222" class="map-btn" target="_blank">
-        🗺️ 카카오맵
-      </a>
-      <a href="https://www.google.com/maps/dir/?api=1&destination=35.1902021,128.0926222" class="map-btn" target="_blank">
-        🌏 구글맵
-      </a>
+      <button class="map-btn" onclick="copyAddress()">📍 주소 복사하기</button>
+      <a href="https://map.kakao.com/link/to/동방관광호텔웨딩홀,35.1902021,128.0926222" class="map-btn" target="_blank">🗺️ 카카오맵</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=35.1902021,128.0926222" class="map-btn" target="_blank">🌏 구글맵</a>
     </div>
   </div>
 
-  <!-- 계좌번호 아코디언 Section -->
-  <div class="section section-1" style="background: #EAEAEA; padding: 0;">
+  <div class="section section-1" style="background: #f8f8f8; padding: 0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/account.jpg" style="width: 100%; display: block; margin: 0 auto 0 auto;" />
 
     <div class="accordion" style="width: 80%; margin: 0 auto;">
       <button class="accordion-btn" style="width: 100%; margin: 0;">신랑측 계좌</button>
       <div class="accordion-content">
         <div class="account-box">
-          <div class="account-info">
-          <strong>신랑</strong><br>
-          농협은행 743138-56-044630
-          <br>
-          예금주 윤동섭
-          </div>
-          <button class="copy-btn" onclick="copyText('74313856044630')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <div class="account-info"><strong>신랑</strong><br>농협은행 743138-56-044630<br>예금주 윤동섭</div>
+          <button class="copy-btn" onclick="copyText('74313856044630')">복사</button>
         </div>
-
         <div class="account-box">
-          <div class="account-info">
-          <strong>신랑혼주</strong><br>
-          농협은행 743138-52-001725
-          <br>
-          예금주 윤원상
-          </div>
-          <button class="copy-btn" onclick="copyText('74313852001725')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <div class="account-info"><strong>신랑혼주</strong><br>농협은행 743138-52-001725<br>예금주 윤원상</div>
+          <button class="copy-btn" onclick="copyText('74313852001725')">복사</button>
         </div>
       </div>
     </div>
@@ -473,52 +449,32 @@
       <button class="accordion-btn" style="width: 100%; margin: 0;">신부측 계좌</button>
       <div class="accordion-content">
         <div class="account-box">
-          <div class="account-info">
-          <strong>신부</strong><br>
-          기업은행 010-2030-4405  
-          <br>
-          예금주 박소민
-          </div>
-          <button class="copy-btn" onclick="copyText('01020304405')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <div class="account-info"><strong>신부</strong><br>기업은행 010-2030-4405<br>예금주 박소민</div>
+          <button class="copy-btn" onclick="copyText('01020304405')">복사</button>
         </div>
-
         <div class="account-box">
-          <div class="account-info">
-          <strong>신부혼주</strong><br>
-          농협은행 130-12-000014
-          <br>
-          예금주 박은영
-          </div>
-          <button class="copy-btn" onclick="copyText('13012000014')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <div class="account-info"><strong>신부혼주</strong><br>농협은행 130-12-000014<br>예금주 박은영</div>
+          <button class="copy-btn" onclick="copyText('13012000014')">복사</button>
         </div>
-
         <div class="account-box">
-          <div class="account-info">
-          <strong>신부혼주</strong><br>
-          농협은행 803-01-349954
-          <br>
-          예금주 민혜경
-          </div>
-          <button class="copy-btn" onclick="copyText('80301349954')">복사</button>  <!-- 오른쪽: 버튼 -->
+          <div class="account-info"><strong>신부혼주</strong><br>농협은행 803-01-349954<br>예금주 민혜경</div>
+          <button class="copy-btn" onclick="copyText('80301349954')">복사</button>
         </div>
       </div>
     </div>
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/account_back.jpg" style="width: 100%; display: block; margin: 0 auto 0 auto;" />
   </div>
 
-  <!-- RSVP -->
   <div class="section rsvp-section" style="margin-top:0;">
     <img src="https://raw.githubusercontent.com/ssommmm/wedding-invitation/main/rsvp.jpg" />
     <a href="https://forms.gle/M734cHHLjnXcgyCE8" class="rsvp-btn">참석 의사 전달하기</a>
   </div>
 
-  <!-- 공유하기 -->
   <div class="section share-box">
     <button class="share-btn" onclick="copyLink()">🔗 링크 주소 복사하기</button>
   </div>
 
   <script>
-    /* 스크롤 애니메이션 */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -527,52 +483,64 @@
           entry.target.classList.remove('show');
         }
       });
-    }, {
-      threshold: 0.15  
-    });
+    }, { threshold: 0.15 });
 
-    document.querySelectorAll('.section').forEach(sec => {
-      observer.observe(sec);
-    });
+    document.querySelectorAll('.section').forEach(sec => observer.observe(sec));
 
-    /* 갤러리 확대 */
+    /* 갤러리 - 슬라이드 기능 */
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
+    const galleryImages = document.querySelectorAll(".gallery img");
+    let currentIndex = 0;
 
-    document.querySelectorAll(".gallery img").forEach(img => {
+    galleryImages.forEach((img, index) => {
       img.addEventListener("click", (e) => {
         e.preventDefault();
-        lightboxImg.src = img.src;
+        currentIndex = index;
+        showImage(currentIndex);
         lightbox.style.display = "flex";
         document.body.style.overflow = "hidden";
       });
     });
 
-    lightbox.addEventListener("click", () => {
-      lightbox.style.display = "none";
-      document.body.style.overflow = "";
-    });
-
-    /* 주소 복사 */
-    function copyAddress() {
-      const address = "경상남도 진주시 논개길 103 동방호텔 3층 그랜드볼룸";
-      navigator.clipboard.writeText(address);
-      alert("주소가 복사되었습니다!\n" + address);
+    function showImage(index) {
+      lightboxImg.src = galleryImages[index].src;
     }
 
-    /* 계좌번호 복사 */
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % galleryImages.length;
+      showImage(currentIndex);
+    }
+
+    function prevImage() {
+      currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      showImage(currentIndex);
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "";
+    }
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    function copyAddress() {
+      navigator.clipboard.writeText("경상남도 진주시 논개길 103 동방호텔 3층 그랜드볼룸");
+      alert("주소가 복사되었습니다!\n경상남도 진주시 논개길 103 동방호텔 3층 그랜드볼룸");
+    }
+
     function copyText(text) {
       navigator.clipboard.writeText(text);
       alert("복사되었습니다!");
     }
 
-    /* 링크 복사 */
     function copyLink() {
       navigator.clipboard.writeText(window.location.href);
       alert("링크가 복사되었습니다!");
     }
 
-    /* 아코디언 */
     document.querySelectorAll('.accordion-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const content = btn.nextElementSibling;
